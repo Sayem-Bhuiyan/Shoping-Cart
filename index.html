@@ -22,13 +22,23 @@
             background-color: rgba(0, 0, 0, 0.849);
             border-radius: 8px;
         }
+        li {
+            font-size: 32px;
+            font-weight: 500;
+            line-height: 26px;
+            margin-bottom: 10px;
+        }
     </style>
 </head>
 <body>
     <section id="cart-section">
         <input type="text" id="product-name" placeholder="Product Name">
         <input type="text" id="product-quantity" placeholder="Quantity">
-        <button>Add To Cart</button>
+        <button onclick="addProduct()">Add To Cart</button>
+
+        <ul id="product-container">
+
+        </ul>
     </section>
 
     <!-- scripts -->
