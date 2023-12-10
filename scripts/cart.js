@@ -11,14 +11,43 @@ const addProduct = () => {
     productField.value = '';
     quantityFiled.value = '';
 
-    console.log(product, quantity);
-    displayProduct(product, quantity)
-}
+    displayProduct(product, quantity);
+    savedProductToLocalStorage(product, quantity)
+};
 
 const displayProduct = (product, quantity) => {
     const ul = document.getElementById('product-container');
     const li = document.createElement('li');
     li.innerText = `${product}: ${quantity}`;
     
-    ul.appendChild(li)
+    ul.appendChild(li);
+};
+
+const getStoredProduct = () => {
+    let cart = {};
+    const savedCart = localStorage.getItem('cart');
+    if(savedCart){
+        cart = JSON.parse(savedCart);
+    }
+    return cart;
 }
+
+const savedProductToLocalStorage = (product, quantity) => {
+    const cart = getStoredProduct();
+    cart[product] = quantity;
+
+    cartStringify = JSON.stringify(cart);
+    console.log(cartStringify)
+
+    localStorage.setItem('cart', cartStringify)
+}
+
+
+const displayProductFromLocalStorage = () => {
+    const savedCart = getStoredProduct()
+    for(const product in savedCart){
+        const quantity = savedCart[product];
+        displayProduct(product, quantity);
+    }
+}
+displayProductFromLocalStorage()
